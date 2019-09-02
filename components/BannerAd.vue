@@ -72,6 +72,10 @@ export default {
     defineSlot() {
       const slot = googletag.defineSlot(this.adUnit, this.sizes, this.id);
       if (!slot) {
+        console.log(
+          `Failed to define slot for ads id "${this.id}" and "${this.adUnit}"`,
+          this.sizes
+        );
         return;
       }
       slot.addService(googletag.pubads());
