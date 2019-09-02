@@ -66,6 +66,9 @@ export default {
       return this.defineSlot();
     },
 
+    /**
+     * @see https://developers.google.com/doubleclick-gpt/reference#googletag.Slot_defineSizeMapping
+     */
     defineSlot() {
       const slot = googletag.defineSlot(this.adUnit, this.sizes, this.id);
       if (!slot) {
