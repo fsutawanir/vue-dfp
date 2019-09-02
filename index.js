@@ -1,17 +1,28 @@
 'use strict';
 
+import BannerAd from './components/BannerAd';
+
 export default {
-    sizes : {
-        banner: [[1200, 600], [1200, 400], [300, 250], [300, 300]],
-        rectangle: [ [300, 250], [300, 300], [300, 600]]
+    sizes: {
+        banner: [
+            [1200, 600],
+            [1200, 400],
+            [300, 250],
+            [300, 300]
+        ],
+        rectangle: [
+            [300, 250],
+            [300, 300],
+            [300, 600]
+        ]
     },
     /**
      * Install DoubleClick Plugin
      * @param Vue
      * @param options
      */
-    install(Vue, options){
-        Vue.component('google-ad', require('./components/BannerAd'));
+    install(Vue, options) {
+        Vue.component('google-ad', BannerAd);
 
         this.init(options, Vue)
     },
@@ -19,7 +30,7 @@ export default {
      * Initialize google tag manager
      * @param options
      */
-    init(options, Vue){
+    init(options, Vue) {
         window.googletag = {};
         let googledfpviewable = 0;
         googletag.cmd = googletag.cmd || [];
@@ -50,11 +61,11 @@ export default {
      * Extract plugin options
      * @param options
      */
-    extractOptions(options, Vue){
+    extractOptions(options, Vue) {
         options.sizes = Object.assign(this.sizes, options.sizes);
         options.mappings = this.prepareMappings(options.mappings);
 
-        if(!options.default_size) {
+        if (!options.default_size) {
             options.default_size = "banner";
         }
 
@@ -66,7 +77,7 @@ export default {
      * @param mappings
      * @returns {*}
      */
-    prepareMappings(mappings){
+    prepareMappings(mappings) {
         Object.keys(mappings).forEach((key) => {
             mappings[key] = this.mapSize(mappings[key])
         });
@@ -78,7 +89,7 @@ export default {
      * @param mapping
      * @returns {*}
      */
-    mapSize(mapping){
+    mapSize(mapping) {
         let mapper = googletag.sizeMapping();
 
         mapping.forEach((map) => {
